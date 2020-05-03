@@ -17,6 +17,20 @@ Install node module:
 ```bash
 $ npm install
 ```
+Create Database:
+update dbconfig.js
+
+```bash
+$ npm run dbcreate
+```
+
+Database Migration:
+
+```bash
+$ npm run dbmigrate
+```
+
+
 Start Server:
 
 ```bash
