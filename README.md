@@ -1,2 +1,1 @@
-# crud-project
-Sample Crud Project
+# Crud-Project
