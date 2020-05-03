@@ -22,3 +22,6 @@ Start Server:
 ```bash
 $ npm start
 ```
+
+## Email
+To view email preview use URL return in response.
