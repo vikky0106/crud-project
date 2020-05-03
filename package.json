@@ -1,0 +1,39 @@
+{
+  "name": "test-task",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "start": "nodemon app.js",
+    "lint": "eslint --ignore-path .eslintignore .",
+    "fix": "eslint --fix --ignore-path .eslintignore .",
+    "format": "prettier --write '**/*.js'",
+    "dbmigrate": "node_modules/.bin/sequelize --config config/dbconfig.js db:migrate",
+    "dbcreate": "node_modules/.bin/sequelize --config config/dbconfig.js db:create"
+  },
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "cookie-parser": "^1.4.5",
+    "crypto": "^1.0.1",
+    "debug": "~4.1.1",
+    "dotenv": "^8.2.0",
+    "express": "~4.17.1",
+    "jsonwebtoken": "^8.5.1",
+    "lodash": "^4.17.15",
+    "morgan": "~1.10.0",
+    "mysql2": "^2.1.0",
+    "nodemailer": "^6.4.6",
+    "nodemon": "^2.0.3",
+    "prettier": "^2.0.5",
+    "sequelize": "^5.21.7",
+    "sequelize-cli": "^5.5.1",
+    "serverless-http": "^2.3.2"
+  },
+  "devDependencies": {
+    "eslint": "^6.8.0",
+    "eslint-config-standard": "^14.1.1",
+    "eslint-plugin-import": "^2.20.2",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-promise": "^4.2.1",
+    "eslint-plugin-standard": "^4.0.1"
+  }
+}
