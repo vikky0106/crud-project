@@ -1,38 +1,27 @@
 'use strict';
 module.exports = {
     up: (queryInterface, Sequelize) => {
-        return queryInterface.createTable('user', {
+        return queryInterface.createTable('permission', {
             id: {
                 allowNull: false,
                 autoIncrement: true,
                 primaryKey: true,
                 type: Sequelize.INTEGER
             },
-            firstName: {
-                type: Sequelize.STRING,
-                required: true
-            },
-            lastName: {
-                type: Sequelize.STRING
-            },
-            email: {
+            slug: {
                 type: Sequelize.STRING,
                 required: true,
                 unique: true
             },
-            password: {
+            name: {
                 type: Sequelize.STRING,
-                required: true
+                required: true,
+                unique: true
             },
-            salt: {
+            description: {
                 type: Sequelize.STRING,
-                required: true
-            },
-            resetPasswordToken: {
-                type: Sequelize.STRING
-            },
-            contactNumber: {
-                type: Sequelize.BIGINT
+                required: true,
+                unique: true
             },
             createdAt: {
                 allowNull: false,
@@ -45,6 +34,6 @@ module.exports = {
         });
     },
     down: (queryInterface, Sequelize) => {
-        return queryInterface.dropTable('user');
+        return queryInterface.dropTable('permission');
     }
 };

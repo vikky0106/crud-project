@@ -1,7 +1,7 @@
 'use strict';
 const constants = require('../utils/constants');
 const { errorHandler } = require('../utils/errorHandler');
-const { getUsers } = require('../database/user');
+const { getRoles } = require('../database/role');
 
 /**
  * Controller for assing product to user.
@@ -9,12 +9,12 @@ const { getUsers } = require('../database/user');
  * @param {object} res res object
  * @return {res} JSON response.
  */
-exports.getUsers = async (req, res) => {
+exports.getRoles = async (req, res) => {
     try {
         /* Check required paramerter
             WE can also use JOI module for advance validation
         */
-        const resData = await getUsers();
+        const resData = await getRoles();
         return res
             .status(constants.STATUS_CODES.SUCCESS_STATUS)
             .json({ data: resData });

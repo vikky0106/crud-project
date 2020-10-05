@@ -13,13 +13,14 @@ const { getUserDetails } = require('../database/user');
  */
 exports.verifyUser = async (req, res, next) => {
     try {
-        const token = req.headers.authorization;
+        let token = req.headers.authorization;
         if (!token) {
             return res.status(constants.STATUS_CODES.UNAUTHORIZED_STATUS).json({
                 error: constants.CODES.UNAUTHORIZED,
                 message: constants.MESSAGES.UNAUTHORIZED
             });
         }
+        token = token.split('Bearer ')[1];
         const docoded = decodeJwtToken(token);
         if (docoded && docoded.userId) {
             req.headers.userId = docoded.userId;

@@ -1,11 +1,11 @@
 'use strict';
 const express = require('express');
 const router = express.Router();
-const { getUsers } = require('../controller/users');
+const { getRoles } = require('../controller/roles');
 const { verifyUser } = require('../middleware/verifyuser');
 
-router.get('/', verifyUser, getUsers);
+router.get('/', verifyUser, getRoles);
 
 module.exports = (app) => {
-    app.use('/api/v1/users', router);
+    app.use('/api/v1/roles', router);
 };

@@ -1,7 +1,7 @@
 'use-strict';
 
 const User = require('../../models').user;
-const constants = require('../utils/constants');
+const UserRole = require('../../models').userRole;
 /**
  * Function get user details from database based on the filter provided.
  * @param {Object} filter Json object contains filter data.
@@ -28,8 +28,12 @@ exports.getUserDetails = async (filter = {}, attributes = []) => {
  */
 exports.saveUser = async (bodyData) => {
     try {
-        await User.create(bodyData);
-        return Promise.resolve();
+        const user = await User.create(bodyData);
+        await UserRole.create({
+            userId: user.id,
+            roleId: bodyData.role
+        });
+        return Promise.resolve(user);
     } catch (error) {
         console.log('Error while saving user in database', error);
         return Promise.reject(error);
@@ -41,23 +45,10 @@ exports.saveUser = async (bodyData) => {
  * @param  {Object} data Json object contains mapping data.
  * @returns {Promise} data
  */
-exports.assignProduct = async (data) => {
+exports.getUsers = async (data) => {
     try {
-        const userDetails = await this.getUserDetails(
-            { id: Number(data.userId) },
-            ['id']
-        );
-        if (!userDetails) {
-            return Promise.reject(
-                new Error({
-                    statusCode: 404,
-                    code: constants.CODES.USER_NOT_FOUND,
-                    message: constants.MESSAGES.USER_NOT_FOUND
-                })
-            );
-        }
-        await userDetails.addProducts(Number(data.productId));
-        return Promise.resolve();
+        const users = await User.findAll();
+        return Promise.resolve(users);
     } catch (error) {
         console.log('Error while assigining product in database', error);
         return Promise.reject(error);

@@ -19,7 +19,7 @@ exports.signup = async (req, res) => {
             WE can also use JOI module for advance validation
         */
         const body = req.body || {};
-        const arr = ['email', 'password'];
+        const arr = ['email', 'password', 'firstName', 'role'];
         const check = checkParams(arr, body);
         if (check.fail) {
             return res

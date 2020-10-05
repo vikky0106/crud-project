@@ -3,7 +3,10 @@ const Crypto = require('crypto');
 
 module.exports = (sequelize, DataTypes) => {
     var User = sequelize.define('user', {
-        firstName: DataTypes.STRING,
+        firstName: {
+            type: DataTypes.STRING,
+            required: true
+        },
         lastName: DataTypes.STRING,
         email: {
             type: DataTypes.STRING,
@@ -20,13 +23,21 @@ module.exports = (sequelize, DataTypes) => {
         },
         resetPasswordToken: {
             type: DataTypes.STRING
+        },
+        contactNumber: {
+            type: DataTypes.BIGINT
         }
     });
 
     User.associate = function (models) {
-        User.belongsToMany(models.product, {
-            through: 'userProduct',
+        User.belongsToMany(models.role, {
+            as: 'roles',
+            through: 'userRole',
             foreignKey: 'userId'
+        });
+        User.hasMany(models.patient, {
+            foreignKey: 'doctor',
+            targetKey: 'id'
         });
     };
 
