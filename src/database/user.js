@@ -2,6 +2,8 @@
 
 const User = require('../../models').user;
 const UserRole = require('../../models').userRole;
+const Role = require('../../models').role;
+
 /**
  * Function get user details from database based on the filter provided.
  * @param {Object} filter Json object contains filter data.
@@ -12,8 +14,17 @@ exports.getUserDetails = async (filter = {}, attributes = []) => {
     try {
         const details = await User.findOne({
             where: filter,
+            include: [
+                {
+                    model: Role,
+                    as: 'roles'
+                }
+            ],
             attributes
         });
+        if (details && details.roles && details.roles.length) {
+            details.dataValues.role = details.roles[0].name;
+        }
         return Promise.resolve(details);
     } catch (error) {
         console.log('Error while getting user details from database', error);

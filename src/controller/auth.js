@@ -78,7 +78,7 @@ exports.login = async (req, res) => {
             {
                 email
             },
-            ['id', 'password', 'salt']
+            ['id', 'password', 'salt', 'firstName', 'lastName', 'email']
         );
 
         if (!userDetails || !userDetails.authenticate(password)) {
